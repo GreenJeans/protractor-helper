@@ -2,101 +2,101 @@ const messageBuilder = require("./constants_and_utils/messageBuilder");
 const utils = require("./constants_and_utils/utils");
 const waiters = require("./waiters");
 
-const fillFieldWithTextWhenVisible = function(
+const fillFieldWithTextWhenVisible = async function(
   htmlElement = utils.requiredParam(fillFieldWithTextWhenVisible),
   text = utils.requiredParam(fillFieldWithTextWhenVisible, "text"),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds
 ) {
   utils.replaceObsoleteFunction("fillFieldWithTextWhenVisible", "fillFieldWithText");
-  this.fillFieldWithText(htmlElement, text, timeoutInMilliseconds);
+  await this.fillFieldWithText(htmlElement, text, timeoutInMilliseconds);
 };
 
-const fillFieldWithText = function(
+const fillFieldWithText = async function(
   htmlElement = utils.requiredParam(fillFieldWithText),
   text = utils.requiredParam(fillFieldWithText, "text"),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds
 ) {
-  waiters.waitForElementVisibility(
+  await waiters.waitForElementVisibility(
     htmlElement,
     timeoutInMilliseconds,
     messageBuilder.getDefaultIsNotVisibleMessage(htmlElement)
   );
-  htmlElement.sendKeys(text);
+  await htmlElement.sendKeys(text);
 };
 
-const fillInputFieldWithFileWhenPresent = function(
+const fillInputFieldWithFileWhenPresent = async function(
   htmlElement = utils.requiredParam(fillInputFieldWithFileWhenPresent),
   absolutePath = utils.requiredParam(fillInputFieldWithFileWhenPresent, "absolutePath"),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds
 ) {
   utils.replaceObsoleteFunction("fillInputFieldWithFileWhenPresent", "uploadFileIntoInputField");
-  this.uploadFileIntoInputField(htmlElement, absolutePath, timeoutInMilliseconds);
+  await this.uploadFileIntoInputField(htmlElement, absolutePath, timeoutInMilliseconds);
 };
 
-const uploadFileIntoInputField = function(
+const uploadFileIntoInputField = async function(
   htmlElement = utils.requiredParam(uploadFileIntoInputField),
   absolutePath = utils.requiredParam(uploadFileIntoInputField, "absolutePath"),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds
 ) {
   const errorMessage = messageBuilder.getDefaultIsNotPresentMessage(htmlElement);
 
-  waiters.waitForElementPresence(htmlElement, timeoutInMilliseconds, errorMessage);
-  htmlElement.sendKeys(absolutePath);
+  await waiters.waitForElementPresence(htmlElement, timeoutInMilliseconds, errorMessage);
+  await htmlElement.sendKeys(absolutePath);
 };
 
-const clearFieldWhenVisible = function(
+const clearFieldWhenVisible = async function(
   htmlElement = utils.requiredParam(clearFieldWhenVisible),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds
 ) {
   utils.replaceObsoleteFunction("clearFieldWhenVisible", "clear");
-  this.clear(htmlElement, timeoutInMilliseconds);
+  await this.clear(htmlElement, timeoutInMilliseconds);
 };
 
-const clear = function(
+const clear = async function(
   htmlElement = utils.requiredParam(clear),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds
 ) {
-  waiters.waitForElementVisibility(
+  await waiters.waitForElementVisibility(
     htmlElement,
     timeoutInMilliseconds,
     messageBuilder.getDefaultIsNotVisibleMessage(htmlElement)
   );
-  htmlElement.clear();
+  await htmlElement.clear();
 };
 
-const clearFieldWhenVisibleAndFillItWithText = function(
+const clearFieldWhenVisibleAndFillItWithText = async function(
   htmlElement = utils.requiredParam(clearFieldWhenVisibleAndFillItWithText),
   text = utils.requiredParam(clearFieldWhenVisibleAndFillItWithText, "text"),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds
 ) {
-  utils.replaceObsoleteFunction("clearFieldWhenVisibleAndFillItWithText", "clearFieldAndFillItWithText");
-  this.clearFieldAndFillItWithText(htmlElement, text, timeoutInMilliseconds);
+  await utils.replaceObsoleteFunction("clearFieldWhenVisibleAndFillItWithText", "clearFieldAndFillItWithText");
+  await this.clearFieldAndFillItWithText(htmlElement, text, timeoutInMilliseconds);
 };
 
-const clearFieldAndFillItWithText = function(
+const clearFieldAndFillItWithText = async function(
   htmlElement = utils.requiredParam(clearFieldAndFillItWithText),
   text = utils.requiredParam(clearFieldAndFillItWithText, "text"),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds
 ) {
-  this.clear(htmlElement, timeoutInMilliseconds);
-  this.fillFieldWithText(htmlElement, text, timeoutInMilliseconds);
+  await this.clear(htmlElement, timeoutInMilliseconds);
+  await this.fillFieldWithText(htmlElement, text, timeoutInMilliseconds);
 };
 
-const fillFieldWithTextWhenVisibleAndPressEnter = function(
+const fillFieldWithTextWhenVisibleAndPressEnter = async function(
   htmlElement = utils.requiredParam(fillFieldWithTextWhenVisibleAndPressEnter),
   text = utils.requiredParam(fillFieldWithTextWhenVisibleAndPressEnter, "text"),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds
 ) {
   utils.replaceObsoleteFunction("fillFieldWithTextWhenVisibleAndPressEnter", "fillFieldWithTextAndPressEnter");
-  this.fillFieldWithTextAndPressEnter(htmlElement, text, timeoutInMilliseconds);
+  await this.fillFieldWithTextAndPressEnter(htmlElement, text, timeoutInMilliseconds);
 };
 
-const fillFieldWithTextAndPressEnter = function(
+const fillFieldWithTextAndPressEnter = async function(
   htmlElement = utils.requiredParam(fillFieldWithTextAndPressEnter),
   text = utils.requiredParam(fillFieldWithTextAndPressEnter, "text"),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds
 ) {
-  this.fillFieldWithText(htmlElement, text + protractor.Key.ENTER, timeoutInMilliseconds);
+  await this.fillFieldWithText(htmlElement, text + protractor.Key.ENTER, timeoutInMilliseconds);
 };
 
 module.exports = {

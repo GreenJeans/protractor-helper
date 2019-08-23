@@ -21,5 +21,6 @@ module.exports.config = {
     showColors: true,
     includeStackTrace: true,
     random: true
-  }
+  },
+  SELENIUM_PROMISE_MANAGER: false
 };

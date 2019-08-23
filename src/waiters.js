@@ -3,7 +3,7 @@ const EC = protractor.ExpectedConditions;
 const messageBuilder = require("./constants_and_utils/messageBuilder");
 const utils = require("./constants_and_utils/utils");
 
-const waitForElementPresence = function(
+const waitForElementPresence = async function(
   htmlElement = utils.requiredParam(waitForElementPresence),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds,
   errorMessage = messageBuilder.getDefaultIsNotPresentMessage(htmlElement)
@@ -13,10 +13,10 @@ const waitForElementPresence = function(
     errorMessage,
     messageBuilder.getDefaultIsNotPresentMessage(htmlElement)
   );
-  browser.wait(EC.presenceOf(htmlElement), timeoutInMilliseconds, errorMessage);
+  await browser.wait(EC.presenceOf(htmlElement), timeoutInMilliseconds, errorMessage);
 };
 
-const waitForElementNotToBePresent = function(
+const waitForElementNotToBePresent = async function(
   htmlElement = utils.requiredParam(waitForElementNotToBePresent),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds,
   errorMessage = messageBuilder.getDefaultIsStillPresentMessage(htmlElement)
@@ -26,10 +26,10 @@ const waitForElementNotToBePresent = function(
     errorMessage,
     messageBuilder.getDefaultIsStillPresentMessage(htmlElement)
   );
-  browser.wait(EC.stalenessOf(htmlElement), timeoutInMilliseconds, errorMessage);
+  await browser.wait(EC.stalenessOf(htmlElement), timeoutInMilliseconds, errorMessage);
 };
 
-const waitForElementVisibility = function(
+const waitForElementVisibility = async function(
   htmlElement = utils.requiredParam(waitForElementVisibility),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds,
   errorMessage = messageBuilder.getDefaultIsNotVisibleMessage(htmlElement)
@@ -39,10 +39,10 @@ const waitForElementVisibility = function(
     errorMessage,
     messageBuilder.getDefaultIsNotVisibleMessage(htmlElement)
   );
-  browser.wait(EC.visibilityOf(htmlElement), timeoutInMilliseconds, errorMessage);
+  await browser.wait(EC.visibilityOf(htmlElement), timeoutInMilliseconds, errorMessage);
 };
 
-const waitForElementNotToBeVisible = function(
+const waitForElementNotToBeVisible = async function(
   htmlElement = utils.requiredParam(waitForElementNotToBeVisible),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds,
   errorMessage = messageBuilder.getDefaultIsStillVisibleMessage(htmlElement)
@@ -52,10 +52,10 @@ const waitForElementNotToBeVisible = function(
     errorMessage,
     messageBuilder.getDefaultIsStillVisibleMessage(htmlElement)
   );
-  browser.wait(EC.invisibilityOf(htmlElement), timeoutInMilliseconds, errorMessage);
+  await browser.wait(EC.invisibilityOf(htmlElement), timeoutInMilliseconds, errorMessage);
 };
 
-const waitForTextToBePresentInElement = function(
+const waitForTextToBePresentInElement = async function(
   htmlElement = utils.requiredParam(waitForTextToBePresentInElement),
   text = utils.requiredParam(waitForTextToBePresentInElement, "text"),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds,
@@ -66,10 +66,10 @@ const waitForTextToBePresentInElement = function(
     errorMessage,
     messageBuilder.getDefaultTextTextNotPresentOnElementMessage(htmlElement, text)
   );
-  browser.wait(EC.textToBePresentInElement(htmlElement, text), timeoutInMilliseconds, errorMessage);
+  await browser.wait(EC.textToBePresentInElement(htmlElement, text), timeoutInMilliseconds, errorMessage);
 };
 
-const waitForTextNotToBePresentInElement = function(
+const waitForTextNotToBePresentInElement = async function(
   htmlElement = utils.requiredParam(waitForTextNotToBePresentInElement),
   text = utils.requiredParam(waitForTextNotToBePresentInElement, "text"),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds,
@@ -80,10 +80,10 @@ const waitForTextNotToBePresentInElement = function(
     errorMessage,
     messageBuilder.getDeafultTextTextIsStillPresentOnElementMessage(htmlElement, text)
   );
-  browser.wait(EC.not(EC.textToBePresentInElement(htmlElement, text)), timeoutInMilliseconds, errorMessage);
+  await browser.wait(EC.not(EC.textToBePresentInElement(htmlElement, text)), timeoutInMilliseconds, errorMessage);
 };
 
-const waitForUrlToBeEqualToExpectedUrl = function(
+const waitForUrlToBeEqualToExpectedUrl = async function(
   expectedUrl = utils.requiredParam(waitForUrlToBeEqualToExpectedUrl, "expectedUrl"),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds,
   errorMessage = messageBuilder.getDefaultCurrentUrlIsDifferentThanExpectedUrlMessage(expectedUrl)
@@ -93,10 +93,10 @@ const waitForUrlToBeEqualToExpectedUrl = function(
     errorMessage,
     messageBuilder.getDefaultCurrentUrlIsDifferentThanExpectedUrlMessage(expectedUrl)
   );
-  browser.wait(EC.urlIs(expectedUrl), timeoutInMilliseconds, errorMessage);
+  await browser.wait(EC.urlIs(expectedUrl), timeoutInMilliseconds, errorMessage);
 };
 
-const waitForUrlNotToBeEqualToExpectedUrl = function(
+const waitForUrlNotToBeEqualToExpectedUrl = async function(
   expectedUrl = utils.requiredParam(waitForUrlNotToBeEqualToExpectedUrl, "expectedUrl"),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds,
   errorMessage = messageBuilder.getDefaultCurrentUrlIsEqualToExpectedUrlMessage(expectedUrl)
@@ -106,10 +106,10 @@ const waitForUrlNotToBeEqualToExpectedUrl = function(
     errorMessage,
     messageBuilder.getDefaultCurrentUrlIsEqualToExpectedUrlMessage(expectedUrl)
   );
-  browser.wait(EC.not(EC.urlIs(expectedUrl)), timeoutInMilliseconds, errorMessage);
+  await browser.wait(EC.not(EC.urlIs(expectedUrl)), timeoutInMilliseconds, errorMessage);
 };
 
-const waitForUrlToContainString = function(
+const waitForUrlToContainString = async function(
   string = utils.requiredParam(waitForUrlToContainString, "string"),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds,
   errorMessage = messageBuilder.getDefaultCurrentUrlDoesNotContainStringMessage(string)
@@ -119,10 +119,10 @@ const waitForUrlToContainString = function(
     errorMessage,
     messageBuilder.getDefaultCurrentUrlDoesNotContainStringMessage(string)
   );
-  browser.wait(EC.urlContains(string), timeoutInMilliseconds, errorMessage);
+  await browser.wait(EC.urlContains(string), timeoutInMilliseconds, errorMessage);
 };
 
-const waitForUrlNotToContainString = function(
+const waitForUrlNotToContainString = async function(
   string = utils.requiredParam(waitForUrlNotToContainString, "string"),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds,
   errorMessage = messageBuilder.getDefaultCurrentUrlContainsTheString(string)
@@ -132,7 +132,7 @@ const waitForUrlNotToContainString = function(
     errorMessage,
     messageBuilder.getDefaultCurrentUrlContainsTheString(string)
   );
-  browser.wait(EC.not(EC.urlContains(string)), timeoutInMilliseconds, errorMessage);
+  await browser.wait(EC.not(EC.urlContains(string)), timeoutInMilliseconds, errorMessage);
 };
 
 module.exports = {

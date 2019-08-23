@@ -24,8 +24,8 @@ function obsoleteFunction(functionName, text = "") {
   warning(`Function '${functionName}' will be deprecated in version 4.0.0!${text}`);
 }
 
-function waitForElementToBeClickable(htmlElement, timeoutInMilliseconds, errorMessage) {
-  browser.wait(EC.elementToBeClickable(htmlElement), timeoutInMilliseconds, errorMessage);
+async function waitForElementToBeClickable(htmlElement, timeoutInMilliseconds, errorMessage) {
+  await browser.wait(EC.elementToBeClickable(htmlElement), timeoutInMilliseconds, errorMessage);
 }
 
 function warnRemoveErrorMessage(functionName, errorMessage, defaultMessage) {

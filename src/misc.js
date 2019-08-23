@@ -3,43 +3,44 @@ const messageBuilder = require("./constants_and_utils/messageBuilder");
 const utils = require("./constants_and_utils/utils");
 const waiters = require("./waiters");
 
-const getBodyElementFromCurrentBrowserOrBrowserInstance = function(browserInstance) {
+const getBodyElementFromCurrentBrowserOrBrowserInstance = async function(browserInstance) {
   const cssSelector = "body";
 
   utils.obsoleteFunction("getBodyElementFromCurrentBrowserOrBrowserInstance");
   if (browserInstance) {
-    return browserInstance.element(by.css(cssSelector));
+    return await browserInstance.element(by.css(cssSelector));
   }
-  return browser.element(by.css(cssSelector));
+  return await browser.element(by.css(cssSelector));
 };
 
-const openNewBrowserInTheSamePage = function(browser = requiredParam(openNewBrowserInTheSamePage, "browser")) {
+const openNewBrowserInTheSamePage = async function(browser = requiredParam(openNewBrowserInTheSamePage, "browser")) {
   utils.obsoleteFunction("openNewBrowserInTheSamePage");
-  return browser.forkNewDriverInstance(true);
+  return await browser.forkNewDriverInstance(true);
 };
 
-const isCurrentUrlDifferentFromBaseUrl = function() {
-  return browser.getCurrentUrl().then(url => url !== browser.baseUrl);
+const isCurrentUrlDifferentFromBaseUrl = async function() {
+  let url = await browser.getCurrentUrl();
+  return (url !== await browser.baseUrl);
 };
 
-const scrollToElementWhenVisible = function(
+const scrollToElementWhenVisible = async function(
   htmlElement = utils.requiredParam(scrollToElementWhenVisible),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds
 ) {
   utils.replaceObsoleteFunction("scrollToElementWhenVisible", "scrollToElement");
-  this.scrollToElement(htmlElement, timeoutInMilliseconds);
+  await this.scrollToElement(htmlElement, timeoutInMilliseconds);
 };
 
-const scrollToElement = function(
+const scrollToElement = async function(
   htmlElement = utils.requiredParam(scrollToElement),
   timeoutInMilliseconds = utils.timeout.timeoutInMilliseconds
 ) {
-  waiters.waitForElementVisibility(
+  await waiters.waitForElementVisibility(
     htmlElement,
     timeoutInMilliseconds,
     messageBuilder.getDefaultIsNotVisibleMessage(htmlElement)
   );
-  browser.executeScript("arguments[0].scrollIntoView(true);", htmlElement);
+  await browser.executeScript("arguments[0].scrollIntoView(true);", htmlElement);
 };
 
 const setTimeout = function(timeoutInMilliseconds = defaultTimeoutInMs) {
