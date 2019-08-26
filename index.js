@@ -1,4 +1,3 @@
-require('./src/matchers');
 module.exports = {
   clickWhenClickable: require("./src/clickersAndTappers").clickWhenClickable,
   click: require("./src/clickersAndTappers").click,
